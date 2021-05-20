@@ -1,10 +1,10 @@
 import Avatar from "./Avatar";
 
-export default function UserInfo(props) {
+export default function UserInfo({ author }) {
     return (
-        <div className="UserInfo">
-        <Avatar src={props.author.avatarUrl} />
-        <div className="UserInfo-name">{props.author.name}</div>
+      <div className="UserInfo">
+        <Avatar src={author.avatarUrl} />
+        <div className="UserInfo-name">{author.name}</div>
       </div>
     )
 }

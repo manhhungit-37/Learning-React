@@ -1,3 +1,3 @@
-export default function Text(props) {
-    return <p>{props.text}</p>
+export default function Text({ text }) {
+    return <p>{text}</p>
 }
