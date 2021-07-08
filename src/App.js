@@ -1,5 +1,4 @@
 import { useState } from "react"
-import ReactBoxes from "./ReactBoxes";
 import Comment from "./components/Comment";
 import HookState from "./components/HookState";
 import ConditionalRendering from "./components/ConditionalRendering";
@@ -8,6 +7,8 @@ import GuestGreeting from "./components/GuestGreeting";
 import Input from "./components/Input";
 import Button from "./components/Button";
 import Composition from "./components/Composition";
+import Greeting  from "./components/Greeting";
+import MyDiv from "./components/MyDiv";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -18,7 +19,6 @@ function App() {
     }
   ])
   const [text, setText] = useState("");
-  let login;
   const comment = {
     date: new Date(),
     text:"I hope you enjoy learning React!",
@@ -26,14 +26,6 @@ function App() {
       name: "Hello Kitty",
       avatarUrl: "https://placekitten.com/g/64/64",
     },
-  }
-
-  
-  if (isLogged) {
-    login = <UserGreeting header="Welcome to" name="Hung" handleLogout={() => setIsLogged(!isLogged)} />
-  }
-  else {
-    login = <GuestGreeting header="Please sign in" handleLogin={() => setIsLogged(!isLogged)} />
   }
 
   // function handleAddRandomTodo() {
@@ -59,12 +51,13 @@ function App() {
 
   return (
     <div className="App">
-      <ReactBoxes />
       <Comment comment={comment}/>
       <HookState /> 
       <ConditionalRendering />
-      <div>{login}</div>
+      {!isLogged && <GuestGreeting header="Please sign in" handleLogin={() => setIsLogged(!isLogged)} />}
+      {isLogged && <UserGreeting header="Welcome to" name="Hung" handleLogout={() => setIsLogged(!isLogged)} />}
 
+      <h1>Add Todo</h1>
       <Input type="text" placeholder="Enter your todo" onChange={event => setText(event.target.value)} />
       <Button type="button" onClick={handleAddTodo} value="Add New Todo" />
       {todos.length > 0 && (
@@ -72,6 +65,12 @@ function App() {
           return <Composition key={todo.id} todo={todo} handleDeleteTodo={handleDeleteTodo} />
         })
       )}
+
+      <h1>Greeting</h1>
+      <Greeting />
+
+      <h1>My Div</h1>
+      <MyDiv />
     </div>
   );
 }
